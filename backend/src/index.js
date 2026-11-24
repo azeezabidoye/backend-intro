@@ -11,19 +11,19 @@ import connectDatabase from "./config/database.js";
 
 // Create an asynchronous function to initialize the application server and connect to the database
 const startServer = async () => {
-    try {
+  try {
     // Connect to the database using the connectDatabase function
     await connectDatabase();
 
     // Start the server and listen on the specified port
-    const PORT = process.env.PORT || 5000;
+    const PORT = process.env.PORT || 8000;
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
     });
-    } catch (error) {
-      console.error("Error starting the server:", error);
-    }
-}
+  } catch (error) {
+    console.error("Error starting the server:", error);
+  }
+};
 
 // Call the startServer function to initiate the server and database connection
 startServer();
