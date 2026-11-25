@@ -21,6 +21,7 @@ const startServer = async () => {
     // Turn on the application for the database
     app.on("error", (error) => {
       console.error("Error starting the server:", error);
+      throw error; // Rethrow the error to be caught by the outer try-catch block
     });
 
     // Start the server and listen on the specified port
