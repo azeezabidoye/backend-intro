@@ -272,4 +272,17 @@ const startServer = async () => {
 startServer();
 ```
 
-## Starting the Server & Connecting to Database
+## Starting the Server
+
+- Install Nodemon for auto reload of the server
+
+```bash
+npm i nodemon
+```
+
+- Configure the CLI in the `package.jason` `script` object
+
+```javascript
+"dev": "nodemon src/index.js"
+"start": "node src/index.js"
+```
