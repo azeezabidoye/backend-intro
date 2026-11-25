@@ -116,4 +116,160 @@ MONGODB_URI = [mongodb_connection_string];
 ```
 
 3. ** Constant Files**
-   This file stores and shares the important values of your project
+   This file stores and shares the important values of your project e.g database name. So you can use them multiple times in your backend project.
+
+- Create an `src` folder and open it
+- Create a folder named `config`
+- Open `config` directory and create a new file named `constant.js`
+- Configure the database name
+
+```javascript
+export const DB_NAME = "backend-intro";
+```
+
+4. **App JS File**
+   This is where every request comes firstly and it contains all the setup needed for an Express application.
+
+- Create `app.js` file directly in the `src` folder
+- Install Express as a dependency
+
+```bash
+npm i express
+```
+
+- Import Express into `app.js` file
+
+```javascript
+import express from "express";
+```
+
+- Create an Express application
+
+```javascript
+const app = express();
+```
+
+- Export the Express app created
+
+```javascript
+export default app;
+```
+
+5. **Database File**
+
+This requires using the Mongoose Plugin to connect the project to the database (MongoDB Atlas)
+
+- Open the `constants` directory
+- Add a new file named `database.js`
+- Install Mongoose plugin
+
+```bash
+npm i mongoose
+```
+
+- Import Mongoose plugin into `database.js`
+
+```javascript
+import mongoose from "mongoose";
+```
+
+- Write an async function to create the database connection using `try & catch` method
+
+```javascript
+// Create a function to connect the database using the provided URI
+const connectDatabase = async () => {
+  try {
+    const connectionInstance = await mongoose.connect(
+      `${process.env.MONGODB_URI}`,
+    );
+    console.log(
+      `\n MongoDB connected successfully: ${connectionInstance.connection.host}`,
+    );
+  } catch (error) {
+    console.error(`Error connecting to the database: ${error.message}`);
+    process.exit(1); // Exit the process with an error code
+  }
+};
+```
+
+- Export the `connectDatabase()` function
+
+```javascript
+export default connectDatabase();
+```
+
+6. **Index/Server File**
+   This is an important file that starts your backend services
+
+- Create a new file named `index.js` in `src` directory
+- Decalare the PORT for the server as an environment variable, update `.env` with:
+
+```javascript
+PORT = 5000;
+```
+
+- Install the Dotenv plugin
+
+```bash
+npm i dotenv
+```
+
+- Configure the environment variable path
+
+```javascript
+// Import dotenv to load environment variables from a .env file
+import dotenv from "dotenv";
+
+// Configure dotenv to load variables from the .env file
+dotenv.config({
+  path: "./.env",
+});
+```
+
+- Configure database connection to the server
+
+```javascript
+// Import the connectDatabase function from the database configuration file
+import connectDatabase from "./config/database.js";
+```
+
+- Store the PORT in a variable
+
+```javascript
+// Start the server and listen on the specified port
+const PORT = process.env.PORT || 8000;
+```
+
+- Create an async function to initialize the server
+
+```javascript
+// Create an asynchronous function to initialize the application server and connect to the database
+const startServer = async () => {
+  try {
+    // Connect to the database using the connectDatabase function
+    await connectDatabase();
+
+    // Turn on the application for the database
+    app.on("error", (error) => {
+      console.error("Error starting the server:", error);
+      throw error; // Rethrow the error to be caught by the outer try-catch block
+    });
+
+    // Start the server and listen on the specified port
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error("Error starting the server:", error);
+  }
+};
+```
+
+- Instantiate/call `startServer()` the function
+
+```javascript
+// Call the startServer function to initiate the server and database connection
+startServer();
+```
+
+## Starting the Server & Connecting to Database
