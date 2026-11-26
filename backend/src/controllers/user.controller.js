@@ -27,11 +27,14 @@ export const registerUser = async (req, res) => {
       username,
       email: email.toLowerCase(),
       password,
+      loggedIn: false, // Set the loggedIn field to false by default
     });
 
-    // Send a success response
+    // Send a success response0
     res.status(201).json({ message: "User registered successfully", user });
   } catch (error) {
-    res.status(500).json({ message: "Error registering user" });
+    res
+      .status(500)
+      .json({ message: "Error registering user", error: error.message });
   }
 };
