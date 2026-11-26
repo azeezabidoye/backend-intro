@@ -12,8 +12,22 @@ export const registerUser = async (req, res) => {
       return res.status(400).json({ message: "All fields are required" });
     }
 
+    // Check if a user with the same email already exists in the database
+    const existingUser = await User.findOne({ email: email.toLowerCase() });
+
+    // If a user with the same email exists, return an error
+    if (existingUser) {
+      return res
+        .status(400)
+        .json({ message: "User with this email already exists" });
+    }
+
     // Save the new user to the database
-    const user = await User.create({ username, email, password });
+    const user = await User.create({
+      username,
+      email: email.toLowerCase(),
+      password,
+    });
 
     // Send a success response
     res.status(201).json({ message: "User registered successfully", user });
