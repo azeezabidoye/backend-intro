@@ -12,4 +12,22 @@ const userSchema = new Schema({
     minlength: 1,
     maxlength: 30,
   },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true,
+    lowercase: true,
+    minlength: 5,
+    maxlength: 50,
+  },
+  password: {
+    type: String,
+    required: true,
+    minlength: 6,
+    maxlength: 50,
+  },
 });
+
+// Create and export the User model based on the defined schema
+export const User = mongoose.model("User", userSchema);
