@@ -2,7 +2,7 @@
 import { User } from "../models/user.model.js";
 
 // Define a controller function to handle user registration
-export const registerUser = async (req, res) => {
+const registerUser = async (req, res) => {
   try {
     // Extract user data from the request body
     const { username, email, password } = req.body;
@@ -31,10 +31,17 @@ export const registerUser = async (req, res) => {
     });
 
     // Send a success response0
-    res.status(201).json({ message: "User registered successfully", user });
+    res
+      .status(201)
+      .json({ message: "User registered successfully", user: { user._id, email: user.email, username: user.username } });
   } catch (error) {
     res
       .status(500)
       .json({ message: "Error registering user", error: error.message });
   }
+};
+
+// Export functions and variables to be used in other parts of the application
+export default {
+  registerUser,
 };
