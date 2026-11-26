@@ -31,9 +31,10 @@ const registerUser = async (req, res) => {
     });
 
     // Send a success response0
-    res
-      .status(201)
-      .json({ message: "User registered successfully", user: { user._id, email: user.email, username: user.username } });
+    res.status(201).json({
+      message: "User registered successfully",
+      user: { id: user._id, email: user.email, username: user.username },
+    });
   } catch (error) {
     res
       .status(500)
@@ -42,6 +43,4 @@ const registerUser = async (req, res) => {
 };
 
 // Export functions and variables to be used in other parts of the application
-export default {
-  registerUser,
-};
+export { registerUser };
