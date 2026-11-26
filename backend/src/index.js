@@ -1,6 +1,9 @@
 // Import dotenv to load environment variables from a .env file
 import dotenv from "dotenv";
 
+// Import the express application instance from the app.js file
+import app from "./app.js";
+
 // Configure dotenv to load variables from the .env file
 dotenv.config({
   path: "./.env",
@@ -21,7 +24,7 @@ const startServer = async () => {
     // Turn on the application for the database
     app.on("error", (error) => {
       console.error("Error starting the server:", error);
-      throw error; // Rethrow the error to be caught by the outer try-catch block
+      // throw error; // Rethrow the error to be caught by the outer try-catch block
     });
 
     // Start the server and listen on the specified port

@@ -233,6 +233,13 @@ dotenv.config({
 import connectDatabase from "./config/database.js";
 ```
 
+- Import Express App from `app.js`
+
+```javascript
+// Import the express application instance from the app.js file
+import app from "./app.js";
+```
+
 - Store the PORT in a variable
 
 ```javascript
