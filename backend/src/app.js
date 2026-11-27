@@ -4,6 +4,9 @@ import express from "express";
 // Create an instance of the express application
 const app = express();
 
+// Setup middleware to parse incoming JSON requests
+app.use(express.json());
+
 // Import the routes in to Express application
 import userRoutes from "./routes/user.route.js";
 
