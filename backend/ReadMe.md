@@ -149,6 +149,12 @@ import express from "express";
 const app = express();
 ```
 
+- Setup Express app middleware to parse JSON files
+
+```javascript
+app.use(express.json());
+```
+
 - Export the Express app created
 
 ```javascript
