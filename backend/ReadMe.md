@@ -411,3 +411,26 @@ export default router;
 ```
 
 ## Controllers
+
+Controllers decides what kind of response comes back from a request whenever a request is made through a particular route
+
+- Add a new `controller` folder to the `src` folder
+- Create a new file for `users` controller in the `controller` directory as `user.controller.js`
+- Import the user-model-schema to design the controller blueprint
+
+```javascript
+import { User } from "../models/user.model.js";
+```
+
+- Create an async function to "register" users, with both `req` and `res` as the parameters and use `try & catch` for the logics
+- Save the essential data as designed in the model in a variable
+- Add some basic validation to comfirm if the data is provided correctly:
+  - Check if user already exists
+- Create a new user
+- Send response to the new user
+- Catch the error
+- Export the `resgisterUser` async function as one of the items
+
+```javascript
+export default { registerUser };
+```
